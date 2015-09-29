@@ -1,0 +1,1 @@
+Bloomberg and the Sarcasm. Get with it.

@@ -1,4 +1,6 @@
 from textblob import TextBlob
+from itertools import imap
+
 import pprint
 
 """
@@ -48,22 +50,42 @@ def crush(pattern):
 def neutral_exclude(pattern):
 	return filter(lambda x: x !=0,pattern)
 
-def sarcasm_test(text):
+def check_cue_words(text):
+	CUES=[
+		"stupid",
+		"shit",
+		"oh",
+		"yeah",
+		"sure",
+		"forget",
+		"supposed",
+		"dont waste your",
+		"all of my",
+		"go back to",
+		"a pair of",
+		"needless to say",
+		"are looking",
+		"!",
+		"..."
+	]
+	return any(imap(text.lower().__contains__, CUES))
+
+def check_patterns(text):
 	PATTERNS={(1,-1),(-1,1),(-1,-1),(-1,0),(1,0,-1),(-1,0,1)}
 	pattern=sentiment_pattern(text)
 	crushed_pattern=tuple(crush(pattern))
-	return crushed_pattern in PATTERNS
+	return crushed_pattern in PATTERNS	
+
+def sarcasm_test(text):
+	cues=check_cue_words(text)
+	patterns=check_patterns(text)
+	return cues or patterns
 
 
 # text="I haven't had fun"
 # blob=TextBlob(text)
 # print(blob.sentiment)
 
-text="Absolutely mind blowing, pushing has never been so easy or so exciting. No doubt Apple will copy it on their 2018 iphones and tout it as the next big thing!"
-
+# text="Absolutely mind blowing, pushing has never been so easy or so exciting. No doubt Apple will copy it on their 2018 iphones and tout it as the next big thing!"
+text="Yeah, I definitely believe this is the best alarm app. It didn't wake me up three days in a row!!!"
 print(sarcasm_test(text))
-
-
-
-
-

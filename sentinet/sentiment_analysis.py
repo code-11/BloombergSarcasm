@@ -1,6 +1,10 @@
 from textblob import TextBlob
 from itertools import imap
 
+
+from samr.data import Datapoint
+from samr.predictor import PhraseSentimentPredictor
+
 # import pprint
 
 """
@@ -17,7 +21,27 @@ Will extract a sentiment pattern from a string of words.
 The pattern can look like many things as dictated by the options.
 The default options result in a pattern simmilar to (-1,1,1,1,0 )
 """
-def sentiment_pattern(text, gram_n=1):
+def sentiment_pattern(text, gram_n=6, predictor=None):
+	
+	blob= TextBlob(text)
+	ngrams=blob.ngrams(n=gram_n)
+	sentiment_list=[]
+	datalist = []
+	for gram in ngrams:
+		str_gram=" ".join(gram)
+		data = (0, 0, str_gram, None)
+		datalist.append(Datapoint(*data))
+
+	prediction = predictor.predict(datalist)
+
+	for sentiment in prediction:
+		sentiment = int(sentiment)
+		if sentiment < 2: sentiment_list.append(-1)
+		if sentiment == 2: sentiment_list.append(0)
+		if sentiment > 2: sentiment_list.append(1)
+
+	return sentiment_list
+	"""
 	blob= TextBlob(text)
 	ngrams=blob.ngrams(n=gram_n)
 	sentiment_list=[]
@@ -32,6 +56,7 @@ def sentiment_pattern(text, gram_n=1):
 		sentiment_list.append(sentiment)
 
 	return sentiment_list
+	"""
 
 def crush(pattern):
 	if pattern==[]:
@@ -66,15 +91,21 @@ def check_cue_words(text):
 		"needless to say",
 		"are looking",
 		"!",
-		"..."
+		"..." 
 	]
 	return any(imap(text.lower().__contains__, CUES))
 
-def check_patterns(text):
-	PATTERNS={(1,-1),(-1,1),(1,0,-1),(-1,0,1)}
-	pattern=sentiment_pattern(text)
+def check_patterns(text, predictor = None):
+	PATTERNS={(0, 1,-1),(0, -1,1),(1,0,-1),(-1,0,1), (-1, 1, 0), (1, -1, 0)} 
+	pattern=sentiment_pattern(text, predictor = predictor)
 	crushed_pattern=tuple(crush(pattern))
-	return crushed_pattern in PATTERNS	
+
+	crushed_pattern_list = list(crushed_pattern)
+	crushed_pattern_tuples_list = zip(crushed_pattern_list, crushed_pattern_list[1:], crushed_pattern_list[2:])
+
+	match = list(set(crushed_pattern_tuples_list).intersection(PATTERNS))
+
+	return len(match) > (len(crushed_pattern_tuples_list) * 0.05)
 
 def check_speech_patterns(text):
 	PATTERNS={
@@ -111,11 +142,11 @@ def check_speech_patterns(text):
 				return True
 	return False
 
-def sarcasm_test(text):
+def sarcasm_test(text, predictor = None):
 	cues=check_cue_words(text)
-	patterns=check_patterns(text)
+	patterns=check_patterns(text, predictor)
 	speech_patterns=check_speech_patterns(text)
-	return cues or patterns or speech_patterns
+	return patterns
 
 # # text="I haven't had fun"
 # # blob=TextBlob(text)

@@ -189,19 +189,24 @@ non_sarcastic_text=[
 "Great app and service.  I really like the pay as you go service.  They also have a broad range of OS support so it works on my other non-kind devices.  I've used everything out there you can imagine (Onenote, everyone, smart receipts, neat, etc....) and this was the best and most feature rich.", #B004JP3ZJK
 "Indeed is your all-in-one job search site.  You can post resumes, profiles, and it searches for you the other places like CareerBuilder.  Only search engine I would use."] #B004JP482I
 
-TOTAL=99
+import pickle
+import dill
+
+predictor = pickle.load(open("predictor.pickle", "rb" ) )
+
+TOTAL=len(sarcastic_text)
 right=0
-for text in sarcastic_text:
-	if sentiment_analysis.sarcasm_test(text):
+for (i, text) in enumerate(sarcastic_text):
+	if sentiment_analysis.sarcasm_test(text, predictor):
 		right+=1
 print("[TOTAL SARCASTIC] : "+str(TOTAL))
 print("[TOTAL SARCASTIC RIGHT] : "+str(right))
 print("[SARCASTIC ACCURACY] : "+str(round(right/float(TOTAL),4)*100)+"%")
 
-TOTAL=87
+TOTAL=len(non_sarcastic_text)
 right=0
-for text in sarcastic_text:
-	if not sentiment_analysis.sarcasm_test(text):
+for (i, text) in enumerate(non_sarcastic_text):
+	if not sentiment_analysis.sarcasm_test(text, predictor):
 		right+=1
 print("[TOTAL REGULAR] : "+str(TOTAL))
 print("[TOTAL REGULAR RIGHT] : "+str(right))

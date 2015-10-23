@@ -71,7 +71,7 @@ def check_cue_words(text):
 	return any(imap(text.lower().__contains__, CUES))
 
 def check_patterns(text):
-	PATTERNS={(1,-1),(-1,1),(-1,-1),(-1,0),(1,0,-1),(-1,0,1)}
+	PATTERNS={(1,-1),(-1,1),(1,0,-1),(-1,0,1)}
 	pattern=sentiment_pattern(text)
 	crushed_pattern=tuple(crush(pattern))
 	return crushed_pattern in PATTERNS	
@@ -124,5 +124,5 @@ def sarcasm_test(text):
 # # text="Absolutely mind blowing, pushing has never been so easy or so exciting. No doubt Apple will copy it on their 2018 iphones and tout it as the next big thing!"
 # text="Yeah, I definitely believe this is the best alarm app. It didn't wake me up three days in a row!!!"
 # text="Beyond reality. Since the recent update, I have joined the cast of Sliders which has allowed me to travel amongst different dimensions and worlds. Don't know what I would have done without you Samsung. I'd still be stuck on planet Desta3. Since being pushed to new world's I have spawned my ability to comment as other users, thus allowing me to share everything about all my other lives!"
-text="Thank you for washing my cup carefully. Thank you for crashing my treasure" 
-print(check_speech_patterns(text))
+# text="Thank you for washing my cup carefully. Thank you for crashing my treasure" 
+# print(check_speech_patterns(text))

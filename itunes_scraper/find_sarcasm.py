@@ -25,8 +25,9 @@ def get_reviews(result):
 	return reviews 
 
 pp = pprint.PrettyPrinter(indent=4)
-apps = itunes.search(query='a', media='software')
-print(len(apps))
-# pp.pprint(get_reviews(app))
+apps = itunes.search(query='strategy games', media='software')
+app=apps[0]
+pp.pprint(get_reviews(app))
+# print(dir(itunes))
 # the_id=app.get_id()
 # print(app_look.getReviews(143441,the_id,maxReviews=100))

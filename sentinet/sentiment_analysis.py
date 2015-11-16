@@ -6,6 +6,12 @@ from samr.predictor import PhraseSentimentPredictor
 
 from sklearn.cross_validation import KFold
 
+import httplib
+import json
+import urllib
+import os
+import glob
+
 sarcastic_text=["Wow, another free update!!!?! I don't feel right downloading an update for this app, for free, after it has given my family so much. I sent a check to Samsung for all this app has done but they refused to cash it. I'm left with only one option, to pledge my first born son's life to them.",
 "The mysterious ways of push My grades were suffering. I had a bad job, very few friends, and I was partially deaf. Then this app came into my life, and all of a sudden life took a 180. I became valedictorian of my class, got a huge raise, and I hear clear as the sunny skies. God bless Samsung push service, and America.",
 "The push i need I dont know what this app really do, but I come here whenever I'm in the toilet doing the second stuff and need some extra force push. Thanks everyone, thanks Samsung, thanks Push Service.",
@@ -106,6 +112,8 @@ sarcastic_text=["Wow, another free update!!!?! I don't feel right downloading an
 "I have been given the gift of knowledge. When I saw this app, it was as if God himself had come down and given me the answers to all of my problems. Thank you for this app!",
 "This app is the most amazing thing in ever. Instead of looking slight to the left I can go through 30 steps to see if it is dark. Simply amazing"]
 
+
+
 non_sarcastic_text=[
 "I've never written a review before, but this app is such a hit with my 14 month old granddaughter, I thought I should share that!  She absolutely loves the song and the options of three different styles (western, rock and pop)  All the interactive things to touch also thrill her--the cat under the bed, the dog at the window, bouncing ball, lamp that makes everything go dark and so on.  Be warned, though, everytime she spots my Kindle Fire, she HAS to play the 'Monkey Game.'", #B004A9SDD8
 "does not let you sample only for a sec. if you download  it to computer it talk your music you have try to sell it back to too. if you join with a membership and if you don't pay they  sell your music on your computer . how when you combine your to there player . i know cause the did it to me had rhapsody a long time unit  it happen i close the account . don't mine paying. but not for music i have  before that . had the old look . at the time now it worse", #B004AFQAUA
@@ -195,6 +203,29 @@ non_sarcastic_text=[
 "Great app and service.  I really like the pay as you go service.  They also have a broad range of OS support so it works on my other non-kind devices.  I've used everything out there you can imagine (Onenote, everyone, smart receipts, neat, etc....) and this was the best and most feature rich.", #B004JP3ZJK
 "Indeed is your all-in-one job search site.  You can post resumes, profiles, and it searches for you the other places like CareerBuilder.  Only search engine I would use."] #B004JP482I
 
+
+import csv
+with open('MTurkData_for_Model.csv', 'rb') as csvfile:
+	csvreader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
+	for row in csvreader:
+		sarcastic_text.append(row['Text'].decode('unicode_escape').encode('ascii','ignore'))
+
+path = './Regular'
+
+for filename in glob.glob(os.path.join(path, '*.txt')):
+	review = ""
+	start = 0
+	for line in open(filename):
+		l = line.strip('\n')
+		if l == "</REVIEW>": break
+		if start == 1:
+			review += l
+		if l == "<REVIEW>":
+			start = 1
+
+	print review
+	non_sarcastic_text.append(review)
+	if len(non_sarcastic_text) >= len(sarcastic_text): break
 
 # import pprint
 
@@ -290,16 +321,13 @@ def check_cue_words(text):
 
 def speech_patterns(text):
 	blob = TextBlob(text)
-	ngrams=blob.ngrams(n=2)
-	speech_list = []
-	for gram in ngrams:
-		str_gram=" ".join(gram)
-		gram_blob=TextBlob(str_gram)
-		tags=gram_blob.tags
-		lst1, lst2 = zip(*tags)
-		speech_list.append(lst2)
+	tags=blob.tags
+	if len(tags) == 0: return []
+	ngram, tags = zip(*tags)
+	tags_gram = zip(tags[:-1], tags[1:])
+	
 
-	return speech_list
+	return tags_gram
 
 
 
@@ -307,7 +335,9 @@ feature_dict_vector = []
 tag_vector = []
 
 def extract_features(text, predictor = None):
+
 	pattern=sentiment_pattern(text, predictor = predictor)
+
 
 	pattern_tuples_list = zip(pattern, pattern[1:], pattern[2:])
 
@@ -331,6 +361,8 @@ def extract_features(text, predictor = None):
 import pickle
 import dill
 
+'''
+
 print "Loading Predictor..."
 
 predictor = pickle.load(open("predictor.pickle", "rb" ) )
@@ -340,12 +372,14 @@ print "Extracting Features - 1..."
 for i in sarcastic_text:
 	extract_features(i, predictor)
 	tag_vector.append(1)
+	print sarcastic_text.index(i)
 
 print "Extracting Features - 0..."
 
 for i in non_sarcastic_text:
 	extract_features(i, predictor)
 	tag_vector.append(0)
+	print non_sarcastic_text.index(i)
 
 print "Translating Features..."
 
@@ -373,7 +407,7 @@ for i in sarcastic_text:
 for i in non_sarcastic_text:
 	tag_vector.append(0)
 
-'''
+
 
 print "K-Fold Cross Validation..."
 
@@ -385,7 +419,7 @@ TN = 0
 FP = 0
 FN = 0
 
-for lp in range(0, 100):
+for lp in range(0, 20):
 	cv = KFold(len(feature_vector), shuffle = True)
 	for trains, tests in cv:
 		X1 = []
@@ -398,7 +432,7 @@ for lp in range(0, 100):
 		for i in tests:
 			X2.append(feature_vector[i])
 			Y2.append(tag_vector[i])
-		clf = RandomForestClassifier(n_estimators = 100, max_depth=None, min_samples_split=1, bootstrap=False)
+		clf = RandomForestClassifier(n_estimators = 1000, n_jobs = -1)
 		clf.fit(X1, Y1)
 		Y_pred = clf.predict(X2)
 		TP += len([i for i, j in zip(Y2, Y_pred) if i == 1 and j == 1])
@@ -410,6 +444,9 @@ pre = TP / (TP + FP + 0.0)
 rec = TP / (TP + FN + 0.0)
 pacc = TP / (TP + FN + 0.0)
 nacc = TN / (TN + FP + 0.0)
+
+print "Sarcastic:" + str(TP + FN)
+print "Non-Sarcastic:" + str(TN + FP)
 print "Precision:" + str(pre)
 print "Recall:" + str(rec)
 print "Positive Accuracy:" + str(pacc)

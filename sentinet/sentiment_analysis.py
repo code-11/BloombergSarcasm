@@ -12,6 +12,8 @@ import urllib
 import os
 import glob
 
+
+#Forgive us for putting the data in-line. These two lists were collected by hand from itunes.
 sarcastic_text=["Wow, another free update!!!?! I don't feel right downloading an update for this app, for free, after it has given my family so much. I sent a check to Samsung for all this app has done but they refused to cash it. I'm left with only one option, to pledge my first born son's life to them.",
 "The mysterious ways of push My grades were suffering. I had a bad job, very few friends, and I was partially deaf. Then this app came into my life, and all of a sudden life took a 180. I became valedictorian of my class, got a huge raise, and I hear clear as the sunny skies. God bless Samsung push service, and America.",
 "The push i need I dont know what this app really do, but I come here whenever I'm in the toilet doing the second stuff and need some extra force push. Thanks everyone, thanks Samsung, thanks Push Service.",
@@ -203,6 +205,185 @@ non_sarcastic_text=[
 "Great app and service.  I really like the pay as you go service.  They also have a broad range of OS support so it works on my other non-kind devices.  I've used everything out there you can imagine (Onenote, everyone, smart receipts, neat, etc....) and this was the best and most feature rich.", #B004JP3ZJK
 "Indeed is your all-in-one job search site.  You can post resumes, profiles, and it searches for you the other places like CareerBuilder.  Only search engine I would use."] #B004JP482I
 
+more_non_sarcastic_text=["This game was fun to play but was not as good as 1 & 2. I would still highly recommend it.",
+"Very addicting!!!",
+"People have been asking for this game for a long time it's Amazing you get to unlock new fur coats",
+"I love this game it is sooo AWSOME!!!  Get it it is rockin AWSOME!!!!!!!!!!! It's kinda like WoltQuest only your a fox. Get it!",
+"Could not get this app to open.",
+"Couldn't get it to work on this cheap Chinese Android",
+"There are some really realistic laughs in this app. I've been having fun with this for the last few days pranking my friends and family! I recommend it.",
+"There's some nice cry sounds in this app. They seem realistic for pranking. I will definately use this in the future. Thanks for your work!",
+"Love &#60;3 &#60;3 &#60;3 &#60;3 !",
+"Using this keyboard for couple of days, it's really intuitive & fun to use.",
+"It's good",
+"I like it very much",
+"This was the worse slot game I've ever played. It took over 20 spins before I won any $$$. Downloaded and deleted within a hour!",
+"Really fun game! Addicting too, keeps you guessing!The noise from the doors makes you jump though, loudest noises in the game so far.",
+"this game is fun but kind of hard to pick up some of the items. this game is a fun game to play at night if u have nothing else to do.",
+"Awesome. Really good real world physics. Really good fun and challenging.",
+"This is a Fun and cool 3D Airplane game! Love the 3D graphics and its fun to play. I would recommend this game to everyone that loves simulation games!!",
+"Love this game!!!!! All the scenes are sooo pretty!!!! 10 STARS",
+"Another great hidden object game from tamalaki.  We snatched up almost all of them at the sale prices.  Tons of different ways to play this game!",
+"Addictive and also the only woodchopping game on amazon I have found with 8-bit graphics.",
+"Whilst playing this game I was enthralled at the wonderful features to which make this game unique. One feature I find prominently enticing is the 8 bit graphics.",
+"Great summer themed puzzle game.  Lots of beautiful images of mountains, waterfalls and the beach.  Lots of fun!",
+"NOT WORTH BUYING you pay for it then you have to invest more money or wait to be recharged to continue",
+"Beautiful graphics and smooth animation. I'm so addicted to this game that I kept playing again and again.",
+"This is an excellent game. The candy land setting is great and I have ready played through the first 10 levels without a break. Give it a try.",
+"At first when i saw this i thought it was going to be ANOTHER flappy bird remix, but when i started playing, it turned out to be an amusing fun game!!",
+"This game is so ADDICTING and I can't get tired of this game. When I play this the first time I was so surprised that they made this and I never get tired of it so you guys should play this game. You will regret it!",
+"Love the Fix My Car series, but this one was my favorite.  Only wish I could see more of the girl :)  Cheers.",
+"Really enjoying this one, played the other Fix My Car games too.  Game brings you to paint job, then you need to upgrade to full.  Upgrading.  Thanks guys.  Just wish there was more of the girl!",
+"Pretty nice graphics, funny characters.Good choice for preschool kidz!Good Job! Keep it up!Looking forward for the other products of the developer!",
+"I really love this kind of game it gets me thinking just to solve the pica.Thank you for providing this great games for us and I love that they are free.",
+"Nice app. does the job pretty well. just the app I was looking for to do the editing on the go. highly recommended",
+"Simple yet lovely design. Creative game play. It's definitely an addictive puzzle game.",
+"what a smashing game would recommend it",
+"There's not much not to like. The environment is well drawn and the game itself is well thought out. Recommended way to pass time.",
+"This is an awesome counter! It does everything you need a life point counter to do but the best part is the custom background. Any picture you have saved can be made the backdrop....sweetness.",
+"Love this game graphics are great just want them to make were you can have two loadouts during a hunt",
+"This is the best game ever but if they could add mulitplayer it would be even better but still it Is very Awesome get It NOW",
+"Absolutely wonderful!! One of my favorite games ever. So many neat and cool puzzles",
+"Good game, just the right level of challenge that also allows you zone out and not get stressed.  Highly recommend for those who want a combination of jigsaw puzzle and hidden object.",
+"The product description clearly states minimum operating system is android 2.2 (froyo), but you have the app as showing imcompatibility from Amazon (red x's) with the device I purchased it for!  Either fix this or make up your minds as to what devices this will run on AND that it can be downloaded for!  Sheesh!",
+"This game is fun for little ones. It teaches the numbers and the alphabet in fun little activities. And when you pass a level you get prizes  like coin codes for doodle club",
+"I love all of the cute pets:). My favorite is the monkey. There's so many games to play. Get this game! It's great!!",
+"It's a really nice and fun game its good for 4 year olds I love it so I think  thell LOVE it  toI hope they like it it's really fun.  LOVE.  U  by peace out",
+"Omg I play as a cat its sooo cool!!! I love jumping on people and throwing stuff from shelves! Best game ever!",
+"This works great with beautiful artwork and the the text from the angel card reading is OUTSTANDING! Much more in-depth than some of the other apps like this. Highly recommend.",
+"This game I don't like",
+"This up is  free in amazon and after installing it  i found  helpful  finance info in it,to all persons this app is very free and easy to download.this will help you build the future ahead.",
+"i have just downloaded it on my i phone ,its exactly what i was looking for  it has a very detailed information on how to manage and budget for what you have.a very powerful app on amazon.",
+"Addictive and fantastic game for kids and adults alike! Hurdle jump is our favorite with the Yeti character, and best of all, the power ups are free, so we can add more in whenever!",
+"Very fun game for both the adults & kids.  My daughter & I love playing the Hurdle game especially but the jump rope one is super fun too!  So fun watching your character lose the fat.  Hours of fun & I highly recommend!",
+"One of the best pixel-style games out there! Super simple to learn yet nearly impossible to master!",
+"This is so fun and addictive - can't put it down.  My whole family is fighting over who gets the Kindle next to play Balance of the Shaolin!",
+"Whoever you are &amp;#34;ruby slippers&amp;#34; your not telling the truth about this game! It's not bad at all. It is a great challenge! It helps pass the time when you need it. It's addicting!!!!",
+"Noone should play this game! I don't even know why this game was even created and put in this world",
+"I like this game because it does not take up much storage space and whenever I am bored it is a simple game I can play to pass time.",
+"It's really good very simple and easy to get the game and very good to pass time",
+"I think it's lame that you get 20 tries to start and then you only get 5 there for after and it is dumb the fat re sets every 2 hours.....how would you ever win",
+"This game shows different ways to stay fit and lose weight and at the same time having fun. This game is amazing and very addicting",
+"Such a cute and fun game and more importantly very fun to play !",
+"These are really great scenes in and around Beijing. The objects and add-ins are a bit cartoonish but overall if was an enjoyable game.",
+"If you hate flappy bird Crush Bird is a game for you, I hate flappy bird and every time I kill a bird I feel great thank you levgenii Mykhalevskyi.",
+"This game is very easy and fun.Flappy Bird is impossible and boring.If you have a sense of good games you would play this and give it a 5-star rating.",
+"Wow what a waste of time man! I wish People would QUIT DOING THIS CRAP!! Its just a waste DO NOT GET IT!!HOW CAN AMAZON EVEN ALOW THIS IN THE APPSTOREITS JUST FILLED WITH ADDS, ITS NOT EVEN A GAME!people that do this crap just nee  to SCREW OFF!!!!",
+"Truly inspiring and exciting game! I'll recommend it to all my friends! Super cool!You must give it a try for certain. You won't regret, I promise",
+"It's stupid because u can't make the blocks straight and and its when u move around u can't really move your head but the graphic are ok",
+"Could someone tell me how a person is supposed to play these games from FGL without matches and about s fourth of the playing field hidden???? I'm at a loss.",
+"I was so very excited to see a new Hidden Garden Hidden Object game.  I immediately bought a bunch of amazon coins so I could buy this one and others if available (where are the other new ones? You usually release several at once).  Anyway, I don't know how they did it but this app is a little different than usual.  When you find an object it kind of pops as it disappears.  There's also a little pointer to show where you pointed.  The colors are richer and the pictures more beautiful.  The objects are also just a little bit harder to find which is wonderful because some of the other apps were too easy.  These aren't so hard it makes the app frustrating.  All in all, this app is awesome.  Welcome back Hidden Garden, we've really missed you!!!",
+"I like it.",
+"Love this game! Such a great summery feel! Can't wait for the other seasons and holidays to come so these guys can create some great games!",
+"Amazing images!  I love gardens and these are beautiful! Lots of game modes different ways to find the items.  The second round had me finding different items then the first.",
+"Kept me mesmerized since I have burned out other games that are like this.",
+"Fun and challenging.",
+"I Love it :)Some good to know info and tips.worth the time and the download",
+"Good app,realy valuable tips, and definitly going to save me some money soon.Basic app, but gives you some added value.Hope I helped...",
+"Well worth having.  Makes for a nice pocket oscilloscope AND does FFT Spectrum analysis in REAL TIME.Get it while you can.",
+"The idea is good but I can make the app work in my Kindle.",
+"This app makes picture taking fun.",
+"I like this game very much. Simple challenging yet addictive. I also lik r doing their save bubblee witch saga game",
+"it is a pretty adicting game. I like almost everything about it.the only thing is it glitches up on me sometimes but it might just be because of my kindle fire.I like that on my kindle its a little bit bigger and that's easier.",
+"it doesn't work it starts up but then it says &quot;the game has stooped unexpectedly&quot; so if you can get it to work I'm sure its a good game ,but it just doesn't work for my kindle fire :( if it did work for me I'm sure I would like it.",
+"This game is absolutely awful!!!!  The only thing it has is cute pictures.  Whoever thought of putting this out should be ashamed.  I know I would be.  Do not waste your time on this ....This....hmmmm...so bad I can't think of a word to use....lemon?",
+"This app is fun but,made for beginners to the German languge.It is also limited and didn't take long to go through all of examples. Let me know when you make an app that is more challenging and made for advanced to intermediate people who study Deutsch and wants to keep there language skills advancing when they are not in Deutschland.Danke",
+"Very cool presets to work with good price ive bought both essential preset packs and i love them very great to make music with i love gstomper it rocks making industrial music is my hobby so its pretty fun to make full songs bravo gstomper you make the best app in the world",
+"I love this its a simple 8 bit music maker it makes me feel like a pro great job keep up the good work :D",
+"I like it but controls are tricky but I would recommend it as a good game but it can't beat mine craft or survival craft",
+"I'd rather get Minecraft. I already have it though. Nobody can beat it. This is not bad though. It's a cheaper version of Minecraft but still not as good. :)Minecraft 4ever.",
+"I love this game! You have three classes to choose from. Warrior, Mage, and Hunter. But before you play you have to sign in to Face Book or Ngames. But you can register for Ngames it is completely free. The graphics are really good. So is the gameplay. If anyone is looking for a good rpg then I highly recommend this game.",
+"The game is currently in an Alpha testing stage at the moment so it wouldn't be fair to make final judgements just yet. As for gameplay and mechanics its really simple. In order to play you'll need to sign into facebook or sign up for an account provided by the devs, free of course. First off you chose your class. Warrior, Mage, or Hunter. The game isn't gender locked so you can pick whichever gender you please. You simply do &amp;#34;dungeons&amp;#34; to earn experience and complete quest to earn additional experience.Your party for dungeons consist of 5 characters: Your main hero and 4 assistants. The game is an MMO but you can only interact to players by: Chat, PvP arena, Guild battle, Scramble, Town hub, World bosses.As for fighting mechanics it's auto battle style. You watch as your party fights against the opposing force, be that players or AI. The game is only in Alpha so the game might be a bit buggy, but thats the purpose of the Alpha, to find bugs and report them to the devs so it can be fixed.I gave the game a 4 star rating because of the in app purchase method. When you perform in app purchases you have to put in your mobile phone nunber and then follow instructions given from there and when your transaction is completed you'll be charged on your phone bill. I think this is a bad method seeing that I have a credit card linked to my account and cant use it to make a purchase. I hope the game will support in app purchases from the app store instead of the current method",
+"It is annoying how you move so slowly and I really wish you could fly like in mincraft p.e.  It has room for improvement.",
+"THIS IS THE WORST GAME EVER NOBODY SHOULD EVER GET IT YOU MOVE SO SLOWLEY CANT FLY AND THINKS ITS LIKE MINCRAFT IMA GAMER GIRL SO I KNOW THESE THINGS I RECOMMEND REAL MINECRAFT NOT THIS STUPID STUFF.",
+"No rhyme nor reason to game! Plus there are no understandable directions",
+"I have no idea how to play this and there are no directions.",
+"Luv it luv it luv it",
+"Super cool game",
+"To cool. Literally! Lol. So anyway I was Board and wanted to get a good fun game, and I found what I was looking for.:-):-)&lt;3",
+"It kinds skips on me but its kinda fun.I like it. Hope you do. pretty good. not much there though.",
+"its kinda weird it has toe rings that all.I have to say. but has to have 20 words minimum soi wrote that",
+"Help me sometimes to keep self reminders ... Now I can schedule a message and do my work . The app also has the feature to send immedite texts. So I don't need to switch between apps",
+"Very enjoyable. I recommend it for those who love to battle, and action. A game that all ages will love.",
+"This is a great game. You can collect weapons battle other players and much more! In the beginning you can choose which class you want to be. There are four classes total, Knight, Berserker, Mage, and Pirate, I'm all four! Plenty of dungeons to play in, or campaign, and almost always a match on multiplayer mode. I hope you have a great time playing!~ Kid",
+"Excellent",
+"good app for coverage of the open championship.  scores are updated almost immediately and coverage of other tournament news is thorough.",
+"I love amazon",
+"Really hard to control the plane.",
+"Too fast",
+"Simple and nice game, both for kids and adults.",
+"it is a good and really fun app because you get to awnser the blank partand that is why I like the app",
+"Just downloaded this app for my Android device and it's awesome! Can't wait to use it on my upcoming trip to New York. This seems like a really interesting way to learn the city and its history!",
+"Just alright,  color would help ,it's not real hard  Good way to kill time.",
+"If you are familiar with Cubistry, the game that precedes this one you will love this one too...but this one is very different. Rather than having brightly colored cubes, this game has a monochrome color-scheme with several shades of obe color. The symbols are harder, but that only adds to the challenge. It took me about 6 games to get use to the symbols. Love it.",
+"Anything written by Joel and Victoria is inspiring and directional. I am touched by their sincerity and devotion.",
+"This is a very inspiring read. Anything with The Olsteens will be motivating, inspiring, and a great read.",
+"This is a very detailed simulation (you even have moving objects like the rotors of a wind farm).There are six different areas, though they are rather similar.You can choose either an old glider like Otto Lilienthal flew, or a sailplane.Goal is staying aloft as long as possible and reaching the highest possible altitude.To do this, look for updrafts, these are hazy cylindrical columns.Don't worry if it says warning, updrafts is what you need.Avoid columns with solid blue stripes, these are areas of strong turbulence that can damage and even destroy your glider.The only minor issue I have is on Kindle Fire HD, the framerate is visibly low which leads to slightly laggy controls.Still, a solid five.",
+"Great app, makes learning about the Moon lots of fun. Had a great time trying all the different colors styles. Check it out.",
+"This is a fabulous little app to explore the surface of the moon and the technical support if you need it is first class.",
+"I love it!",
+"I'm so addicted download now.",
+"I really really like this game!",
+"It kept freezing so you never got to do anything I deleted it right after I got it",
+"This is the second one today. Why in the world do people do this. It's some .....! uhgggggggggg'  A advertising scam. I'm sure there will be a third, the other is Baris zombie hunter .",
+"This app requires a LOT of information about your location,network, apps used,etc which is irrelevant to finding your pets age! This is more like spyware, I would NOT recommend it to anyone or even download it!",
+"LOVE THIS APP! Helps me save tons when I'm out shopping!",
+"Great to have coupons from all your favorite stores at your fingertips!",
+"First time playing 2048 game now I understand the hype. It's very fun!",
+"I have searched several 2048 games before i found thid one.This one is the best.You have different kinds of choices.Love this game.",
+"I use it daily to track my spending. Helped me save a lot since I started using it",
+"Great app! Love that it highlights possibly fraudulent transactions and helps me easily investigate. Great interface and design, highly recommend!",
+"In all honesty this game and this series is a complete work of art each of the books come and work together beautifully  when I saw this book came out I literally thought I was gonna burst with joy hero rose gets a big thumbs up from me and I would recommend this book to anyone who loves a story that captures your imagination",
+"This game seems good... but can just be one big disappointment depending on the choices you make.1) in order to kill Victon you have to have a high revenge level. Your revenge level can not be 60 (it probably has to be around 75) or below otherwise you can't kill him.2) towards the beginning of the game it gives you an option to choose that suggests you have romantic interests in Prodigal but you can't actually have a romance with her.3) you get the option to unleash your powers with reckless abandon close to the end of the game but you have to have a high unleash level otherwise you can't unleash your powers.4) *****Spoiler Alert*****you can't save Prodigal in the end***********************************5) you would think that some of the characters in the game would have an indicator to show how they feel about you. I know a few do but characters from the last one are in here and most of them don't. *******Spoiler Alert********Like GG and the crush, for example, do not have one.*******************************************6) this heroes rise seems a lot shorter than the last one",
+"I would totally give it 5 stars but it keeps randomly crashing in my Note 3. Great gameplay, music and story, love it.",
+"Fun and addicting RPG. I like where this game is going and hope there will be updates. Just be aware of crashes.",
+"I own this game on my kindle and PC.  I feel the kindle version of the game is easier.  The company that sells Hobby Farm Show asks for reviews so the sequel can be developed.  What I do not understand is why they need the reviews the sequel is available on the PC.  If you enjoy time management games you will enjoy this one.  The only thing you have to buy is the rest of the levels.",
+"Great for younger kids they are learning that you have to take care of crops and the animalsThey are so fast",
+"This is an easy way to see if you like the game, since it's free.  I purchased the full version after trying it since it contains more challenging puzzles, which are also worth more points.  Both versions are integrated with Amazon's GameCircle so you can post your score to a leaderboard and see how you compare with others.",
+"So challenging and fun for ages of all. Wish could play them on Facebook and share with my friends  hope u guys add to Facebook soon",
+"Downloaded this game for our new Kindle, but quickly took off the app. The only game that we enjoyed was the car racing, so we deleted this app and looked for others. Sorry - not what we were expecting!",
+"I wanted to try this app since this developer has put out some interesting games. However, I am unable to download it as it says there is a geographical restriction.?? This made very little sense and I called Amazon customer service, which was a HUGE waste of time. They didn't seem to know what was going on.PLEASE fix this app so it can be downloaded....",
+"not bad",
+"An addictive little gem of a game. Basically letters fall from the sky and you have to make a well known inspirational or motivational Bible verse. It's not as difficult as it sounds as many of the letters are already filled in for you. I usually start with the smallest words first. GREAT FUN! FIVE STARS!",
+"The Best",
+"Normally Noodlecake Studios puts out pretty good games. This is not one of those. It is too difficult, too hard to understand. I am a very intelligent 31 year old female who likes interesting and difficult strategy/puzzle games. This one doesn't even make much sense. I would love my money refunded but I highly doubt that will happen.",
+"First review :D, anyways this game is like super hexagon. It is super hard, it can will change from spinning to tilting, and it might cause seizures. don't get this game if you don't want to be over challenged or lack focus, otherwise knock yourself out and good luck, you'll need it",
+"Really good fun. Pretty challenging. Even better than the last one.",
+"Names don't fit on stones",
+"Really fun game. Some tricky little shots in there to be found.",
+"Awesome game, beautiful scenes and objects are super tiny and impossible to see to the point where you get upset.",
+"They are all interesting ...wish they had more levels",
+"It was a good game but some major issues that need to be fixed. If they fix the problems I will definitely change my review but it kept kicking me out of the game... not sure if it is just on my device but... hope this helped you :)",
+"I liked the game but every time I  went to the main screen it would crash.  Once they fix that, I will  be willing to give this a better rating",
+"This game is awesome. Great time killer. Never gets old. All in all I'd have to say... AWESOME!!",
+"unable to connect ot anything",
+"Life is a game, Baseball is serious.",
+"Perfect - now need to get NFL Sunday Ticket and NHLCenterIce",
+"GOD BLESS, YOU AND COMPANY",
+"Arcade like old school feel",
+"Superb and Addictive",
+"Not much there - picture not crisp and clear",
+"Only wish I found this app sooner!",
+"The objects you are trying to find are so small that I have a headache from squinting. It is also very short. 10 scenes and end game. To be fair after each HO scene there is a find the differences screen and then you look for a golden key on an additional screen. They are both like the HO scenes. It is definitely a traditional HO game, so if you like straight HO with no storyline then the concept will appeal to you. Be forewarned about the tiny objects, however. If you do find them, take care in your aim because you lose points if you hit them even a bit off.",
+"Best dad ever",
+"i love hockey",
+"Really good. Almost there. All this app really needs is a section where people can add a comment. Still, it is better than the other Youtube apps out there. I recommend",
+"I had been looking for a way to watch YouTube videos on my Kindle when a friend told me about this app. Other apps I found as &#34;workarounds&#34; were hit or miss. Now I can enjoy music and videos on the go",
+"A fabulous looking app with a lot of potential in the future. (It's a mobile site wrapper atm)",
+"good game",
+"Cost: for me it was 99 amazon coins or $.99 cents.Download size:32.6 mb.Install: When installing this game it gets access to:Privacy:a - read phone and identityb - modify or delete the contents of your USB storageread the contents of your USB storagec - find accounts on the deviceDevice Accessa - full network access.b - view network connections.c - view Wi-Fi connections.d - runs at startup.====================================================The game is published by Tamalaki. http://tamalaki.com/whois.htmlWho is Tamalaki?  -- Tamalaki is founded by casual and online gaming expert Martine Spaans. In previous roles she has led the Game Licensing department for Spil Games and rolled out the Online Marketing strategy for companies like Ubisoft/Blue Byte and Gramble on both Web and Mobile. She&#8217;s looking forward to use all this experience to bring your games to the right audience and to give them maximum exposure. Martine is also offering her expertise as a consultancy service. Feel free to get in touch if you&#8217;d like to learn more.",
+"This is the best skateboarding game on the market.  The graphics are amazing, the controls are great, the tricks look SO REAL and the levels are awesome!  Rooftops is my favorite level...HUGE gaps and tons of air!  Way to go Transworld!",
+"I really love the new version because they added missions and career modes for the skaters. My favorite skater is Danny Way.  Highly recommend!",
+"Quite a simple flight plan that became a family challenge of outscoring each other.  Our 6 year old loved beating gramma !",
+"I Use to play this game with my dad when I was a kid all the time it's hard to get anyone to play it any more. OMG is exactly what I said when I saw this game and I don't mind the adds because you get extra coins in the game for them.",
+"This app is so amazing and I actually did not think that the app would work so well, buy this app it's awesome!-Brianna K",
+"This is a good game for people who have plenty of time to waste. However, all you do is simply press buttons. It gets very boring after awhile, and I think should be preferred to children. The ads do get frustrating too, and I think that should be improved as well. I do NOT recommend this game.",
+]
+
+non_sarcastic_text=non_sarcastic_text+more_non_sarcastic_text
+
+print("LEN NONSARCASTIC TRAIN: "+str(len(non_sarcastic_text)))
+
 
 import csv
 with open('MTurkData_for_Model.csv', 'rb') as csvfile:
@@ -210,24 +391,7 @@ with open('MTurkData_for_Model.csv', 'rb') as csvfile:
 	for row in csvreader:
 		sarcastic_text.append(row['Text'].decode('unicode_escape').encode('ascii','ignore'))
 
-path = './Regular'
-
-for filename in glob.glob(os.path.join(path, '*.txt')):
-	review = ""
-	start = 0
-	for line in open(filename):
-		l = line.strip('\n')
-		if l == "</REVIEW>": break
-		if start == 1:
-			review += l
-		if l == "<REVIEW>":
-			start = 1
-
-	print review
-	non_sarcastic_text.append(review)
-	if len(non_sarcastic_text) >= len(sarcastic_text): break
-
-# import pprint
+print("LEN SARCASTIC TEST: "+str(len(sarcastic_text)))
 
 """
 Install Instructions
@@ -254,17 +418,20 @@ def sentiment_pattern(text, gram_n=9, predictor=None):
 		data = (0, 0, str_gram, None)
 		datalist.append(Datapoint(*data))
 
-	prediction = predictor.predict(datalist)
+	if len(datalist)==0:
+		return []
+	else:
+		prediction = predictor.predict(datalist)
 
-	for sentiment in prediction:
-		sentiment = int(sentiment)
-		if sentiment < 2: sentiment = -1
-		if sentiment == 2: sentiment = 0
-		if sentiment > 2: sentiment = 1
-		
-		sentiment_list.append(sentiment)
+		for sentiment in prediction:
+			sentiment = int(sentiment)
+			if sentiment < 2: sentiment = -1
+			if sentiment == 2: sentiment = 0
+			if sentiment > 2: sentiment = 1
+			
+			sentiment_list.append(sentiment)
 
-	return sentiment_list
+		return sentiment_list
 	"""
 	blob= TextBlob(text)
 	ngrams=blob.ngrams(n=gram_n)
@@ -330,12 +497,35 @@ def speech_patterns(text):
 	return tags_gram
 
 
+def make_test_data():
+	#Both of these peices of data come from fillatova's corpus. We shouldn't have touched 
+	#Load non sarcastic testing data
+	non_sarcastic_test=[]
+	path = './Regular'
+	for filename in glob.glob(os.path.join(path, '*.txt')):
+		review = ""
+		start = 0
+		for line in open(filename):
+			l = line.strip('\n')
+			if l == "</REVIEW>": break
+			if start == 1:
+				review += l
+			if l == "<REVIEW>":
+				start = 1
+		if len(non_sarcastic_test)>=437:
+			break
+		non_sarcastic_test.append(review)
 
-feature_dict_vector = []
-tag_vector = []
+
+	#Load sarcastic testing data
+	sarcastic_test=[]
+	for line in open("sarcasm_lines.txt"):
+		sarcastic_test.append(line.split("\t")[1])
+
+	return non_sarcastic_test,sarcastic_test 
 
 def extract_features(text, predictor = None):
-
+	feature_dict_vector = []
 	pattern=sentiment_pattern(text, predictor = predictor)
 
 
@@ -357,11 +547,24 @@ def extract_features(text, predictor = None):
 			feature[i] = 1
 
 	feature_dict_vector.append(feature)
+	return feature_dict_vector
 
-import pickle
 import dill
+import pickle
+from sklearn.svm import SVC
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.feature_extraction import DictVectorizer
+from sklearn.feature_extraction.text import TfidfTransformer
 
-'''
+tag_vector = []
+tag_vector_test=[]
+feature_dict_vector=[]
+feature_dict_vector_test=[]
+non_sarcastic_test,sarcastic_test =make_test_data()
+
+print("LEN NONSARCASTIC TEST: "+str(len(non_sarcastic_test)))
+print("LEN SARCASTIC TEST: "+str(len(sarcastic_test)))
+
 
 print "Loading Predictor..."
 
@@ -370,75 +573,140 @@ predictor = pickle.load(open("predictor.pickle", "rb" ) )
 print "Extracting Features - 1..."
 
 for i in sarcastic_text:
-	extract_features(i, predictor)
+	#feature_dict_vector+=extract_features(i, predictor)
 	tag_vector.append(1)
 	print sarcastic_text.index(i)
 
 print "Extracting Features - 0..."
 
 for i in non_sarcastic_text:
-	extract_features(i, predictor)
+	#feature_dict_vector+=extract_features(i, predictor)
 	tag_vector.append(0)
 	print non_sarcastic_text.index(i)
 
-print "Translating Features..."
+print "Extracting Test Features - 1..."
 
-from sklearn.feature_extraction import DictVectorizer
-from sklearn.feature_extraction.text import TfidfTransformer
-vec = DictVectorizer()
-
-feature_vector = vec.fit_transform(feature_dict_vector).toarray()
-
-transformer = TfidfTransformer()
-
-transformer.fit(feature_vector)
-feature_vector = transformer.transform(feature_vector).toarray()
-
-pickle.dump(feature_vector, open("feature.pickle", "wb" ))
-
-'''
-
-feature_vector = pickle.load(open("feature.pickle", "rb" ) )
+for i in sarcastic_test:
+	#feature_dict_vector_test+=extract_features(i, predictor)
+	tag_vector_test.append(1)
+	print sarcastic_test.index(i)
 
 
-for i in sarcastic_text:
-	tag_vector.append(1)
+print "Extracting Test Features - 0..."
 
-for i in non_sarcastic_text:
-	tag_vector.append(0)
+for i in non_sarcastic_test:
+	feature_dict_vector_test+=extract_features(i, predictor)
+	print len(feature_dict_vector_test)
+	tag_vector_test.append(0)
+	print non_sarcastic_test.index(i) + 1
+
+#ONLY HAVE TO DO THIS ONCE-------------------------------------------------------------
+
+# print "Translating Features..."
+
+# vec = DictVectorizer()
+
+# feature_vector = vec.fit_transform(feature_dict_vector).toarray()
+
+# transformer = TfidfTransformer()
+
+# transformer.fit(feature_vector)
+# feature_vector = transformer.transform(feature_vector).toarray()
+
+# pickle.dump(feature_vector, open("feature.pickle", "wb" ))
+
+
+# print "Translating Test Features..."
+
+# vec_test = DictVectorizer()
+
+# feature_vector_test = vec.fit_transform(feature_dict_vector_test).toarray()
+
+# transformer_test = TfidfTransformer()
+
+# transformer_test.fit(feature_vector_test)
+# feature_vector_test = transformer_test.transform(feature_vector_test).toarray()
+
+# pickle.dump(feature_vector_test, open("feature_test.pickle", "wb" ))
+
+#ONLY HAVE TO DO THIS ONCE-------------------------------------------------------------END
+
+
+#ANALYSIS
+
+# feature_vector = pickle.load(open("feature.pickle", "rb" ) )
+
+
+# for i in sarcastic_text:
+# 	tag_vector.append(1)
+
+# for i in non_sarcastic_text:
+# 	tag_vector.append(0)
 
 
 
-print "K-Fold Cross Validation..."
+# print "K-Fold Cross Validation..."
 
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.svm import SVC
+# TP = 0
+# TN = 0
+# FP = 0
+# FN = 0
+
+# for lp in range(0, 20):
+# 	cv = KFold(len(feature_vector), shuffle = True)
+# 	for trains, tests in cv:
+# 		X1 = []
+# 		Y1 = []
+# 		X2 = []
+# 		Y2 = []
+# 		for i in trains:
+# 			X1.append(feature_vector[i])
+# 			Y1.append(tag_vector[i])
+# 		for i in tests:
+# 			X2.append(feature_vector[i])
+# 			Y2.append(tag_vector[i])
+# 		clf = RandomForestClassifier(n_estimators = 1000, n_jobs = -1)
+# 		clf.fit(X1, Y1)
+# 		Y_pred = clf.predict(X2)
+# 		TP += len([i for i, j in zip(Y2, Y_pred) if i == 1 and j == 1])
+# 		FP += len([i for i, j in zip(Y2, Y_pred) if i == 0 and j == 1])
+# 		TN += len([i for i, j in zip(Y2, Y_pred) if i == 0 and j == 0])
+# 		FN += len([i for i, j in zip(Y2, Y_pred) if i == 1 and j == 0])
+
+# pre = TP / (TP + FP + 0.0)
+# rec = TP / (TP + FN + 0.0)
+# pacc = TP / (TP + FN + 0.0)
+# nacc = TN / (TN + FP + 0.0)
+
+# print "Sarcastic:" + str(TP + FN)
+# print "Non-Sarcastic:" + str(TN + FP)
+# print "Precision:" + str(pre)
+# print "Recall:" + str(rec)
+# print "Positive Accuracy:" + str(pacc)
+# print "Negative Accuracy:" + str(nacc)
+
+# print "F1 Score:" + str(2 * pre * rec / (pre + rec))
+
 
 TP = 0
 TN = 0
 FP = 0
 FN = 0
 
-for lp in range(0, 20):
-	cv = KFold(len(feature_vector), shuffle = True)
-	for trains, tests in cv:
-		X1 = []
-		Y1 = []
-		X2 = []
-		Y2 = []
-		for i in trains:
-			X1.append(feature_vector[i])
-			Y1.append(tag_vector[i])
-		for i in tests:
-			X2.append(feature_vector[i])
-			Y2.append(tag_vector[i])
-		clf = RandomForestClassifier(n_estimators = 1000, n_jobs = -1)
-		clf.fit(X1, Y1)
-		Y_pred = clf.predict(X2)
-		TP += len([i for i, j in zip(Y2, Y_pred) if i == 1 and j == 1])
-		FP += len([i for i, j in zip(Y2, Y_pred) if i == 0 and j == 1])
-		TN += len([i for i, j in zip(Y2, Y_pred) if i == 0 and j == 0])
-		FN += len([i for i, j in zip(Y2, Y_pred) if i == 1 and j == 0])
+feature_vector = pickle.load(open("feature.pickle", "rb" ) )
+feature_vector_test = pickle.load(open("feature_test.pickle", "rb" ) )
+
+print len(tag_vector_test)
+
+clf = RandomForestClassifier(n_estimators = 1000, n_jobs = -1)
+clf.fit(feature_vector, tag_vector)
+
+Y_pred = clf.predict(feature_vector_test)
+
+TP += len([i for i, j in zip(tag_vector_test, Y_pred) if i == 1 and j == 1])
+FP += len([i for i, j in zip(tag_vector_test, Y_pred) if i == 0 and j == 1])
+TN += len([i for i, j in zip(tag_vector_test, Y_pred) if i == 0 and j == 0])
+FN += len([i for i, j in zip(tag_vector_test, Y_pred) if i == 1 and j == 0])
 
 pre = TP / (TP + FP + 0.0)
 rec = TP / (TP + FN + 0.0)
@@ -453,16 +721,3 @@ print "Positive Accuracy:" + str(pacc)
 print "Negative Accuracy:" + str(nacc)
 
 print "F1 Score:" + str(2 * pre * rec / (pre + rec))
-
-
-
-
-# # text="I haven't had fun"
-# # blob=TextBlob(text)
-# # print(blob.sentiment)
-
-# # text="Absolutely mind blowing, pushing has never been so easy or so exciting. No doubt Apple will copy it on their 2018 iphones and tout it as the next big thing!"
-# text="Yeah, I definitely believe this is the best alarm app. It didn't wake me up three days in a row!!!"
-# text="Beyond reality. Since the recent update, I have joined the cast of Sliders which has allowed me to travel amongst different dimensions and worlds. Don't know what I would have done without you Samsung. I'd still be stuck on planet Desta3. Since being pushed to new world's I have spawned my ability to comment as other users, thus allowing me to share everything about all my other lives!"
-# text="Thank you for washing my cup carefully. Thank you for crashing my treasure" 
-# print(check_speech_patterns(text))

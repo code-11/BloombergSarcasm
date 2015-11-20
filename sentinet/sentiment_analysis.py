@@ -1,10 +1,13 @@
 from textblob import TextBlob
 from itertools import imap
+from textblob_aptagger import PerceptronTagger
 
 from samr.data import Datapoint
 from samr.predictor import PhraseSentimentPredictor
 
 from sklearn.cross_validation import KFold
+
+import numpy as np
 
 import httplib
 import json
@@ -487,8 +490,11 @@ def check_cue_words(text):
 	return any(imap(text.lower().__contains__, CUES))
 
 def speech_patterns(text):
-	blob = TextBlob(text)
+	blob = TextBlob(text, pos_tagger=PerceptronTagger())
+
+	print "POS TAGGING"
 	tags=blob.tags
+	print "TAGGING END"
 	if len(tags) == 0: return []
 	ngram, tags = zip(*tags)
 	tags_gram = zip(tags[:-1], tags[1:])
@@ -512,7 +518,7 @@ def make_test_data():
 				review += l
 			if l == "<REVIEW>":
 				start = 1
-		if len(non_sarcastic_test)>=437:
+		if len(non_sarcastic_test) > 437:
 			break
 		non_sarcastic_test.append(review)
 
@@ -555,6 +561,7 @@ from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_extraction import DictVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
+import gc
 
 tag_vector = []
 tag_vector_test=[]
@@ -568,26 +575,32 @@ print("LEN SARCASTIC TEST: "+str(len(sarcastic_test)))
 
 print "Loading Predictor..."
 
+gc.disable()
+
 predictor = pickle.load(open("predictor.pickle", "rb" ) )
+
+gc.enable()
+
+'''
 
 print "Extracting Features - 1..."
 
 for i in sarcastic_text:
-	#feature_dict_vector+=extract_features(i, predictor)
+	feature_dict_vector+=extract_features(i, predictor)
 	tag_vector.append(1)
 	print sarcastic_text.index(i)
 
 print "Extracting Features - 0..."
 
 for i in non_sarcastic_text:
-	#feature_dict_vector+=extract_features(i, predictor)
+	feature_dict_vector+=extract_features(i, predictor)
 	tag_vector.append(0)
 	print non_sarcastic_text.index(i)
 
 print "Extracting Test Features - 1..."
 
 for i in sarcastic_test:
-	#feature_dict_vector_test+=extract_features(i, predictor)
+	feature_dict_vector_test+=extract_features(i, predictor)
 	tag_vector_test.append(1)
 	print sarcastic_test.index(i)
 
@@ -600,94 +613,105 @@ for i in non_sarcastic_test:
 	tag_vector_test.append(0)
 	print non_sarcastic_test.index(i) + 1
 
+
+
 #ONLY HAVE TO DO THIS ONCE-------------------------------------------------------------
 
-# print "Translating Features..."
+print "Translating Features..."
 
-# vec = DictVectorizer()
+vec = DictVectorizer()
 
-# feature_vector = vec.fit_transform(feature_dict_vector).toarray()
+feature_vector = vec.fit_transform(feature_dict_vector).toarray()
 
-# transformer = TfidfTransformer()
+transformer = TfidfTransformer()
 
-# transformer.fit(feature_vector)
-# feature_vector = transformer.transform(feature_vector).toarray()
+transformer.fit(feature_vector)
+feature_vector = transformer.transform(feature_vector).toarray()
 
-# pickle.dump(feature_vector, open("feature.pickle", "wb" ))
+gc.disable()
+
+pickle.dump(feature_vector, open("feature.pickle", "wb" ))
+
+gc.enable()
 
 
-# print "Translating Test Features..."
+print "Translating Test Features..."
 
-# vec_test = DictVectorizer()
+feature_vector_test = vec.transform(feature_dict_vector_test).toarray()
 
-# feature_vector_test = vec.fit_transform(feature_dict_vector_test).toarray()
+feature_vector_test = transformer.transform(feature_vector_test).toarray()
 
-# transformer_test = TfidfTransformer()
+gc.disable()
 
-# transformer_test.fit(feature_vector_test)
-# feature_vector_test = transformer_test.transform(feature_vector_test).toarray()
+pickle.dump(feature_vector_test, open("feature_test.pickle", "wb" ))
 
-# pickle.dump(feature_vector_test, open("feature_test.pickle", "wb" ))
+gc.enable()
 
 #ONLY HAVE TO DO THIS ONCE-------------------------------------------------------------END
 
-
-#ANALYSIS
-
-# feature_vector = pickle.load(open("feature.pickle", "rb" ) )
-
-
-# for i in sarcastic_text:
-# 	tag_vector.append(1)
-
-# for i in non_sarcastic_text:
-# 	tag_vector.append(0)
+'''
 
 
 
-# print "K-Fold Cross Validation..."
-
-# TP = 0
-# TN = 0
-# FP = 0
-# FN = 0
-
-# for lp in range(0, 20):
-# 	cv = KFold(len(feature_vector), shuffle = True)
-# 	for trains, tests in cv:
-# 		X1 = []
-# 		Y1 = []
-# 		X2 = []
-# 		Y2 = []
-# 		for i in trains:
-# 			X1.append(feature_vector[i])
-# 			Y1.append(tag_vector[i])
-# 		for i in tests:
-# 			X2.append(feature_vector[i])
-# 			Y2.append(tag_vector[i])
-# 		clf = RandomForestClassifier(n_estimators = 1000, n_jobs = -1)
-# 		clf.fit(X1, Y1)
-# 		Y_pred = clf.predict(X2)
-# 		TP += len([i for i, j in zip(Y2, Y_pred) if i == 1 and j == 1])
-# 		FP += len([i for i, j in zip(Y2, Y_pred) if i == 0 and j == 1])
-# 		TN += len([i for i, j in zip(Y2, Y_pred) if i == 0 and j == 0])
-# 		FN += len([i for i, j in zip(Y2, Y_pred) if i == 1 and j == 0])
-
-# pre = TP / (TP + FP + 0.0)
-# rec = TP / (TP + FN + 0.0)
-# pacc = TP / (TP + FN + 0.0)
-# nacc = TN / (TN + FP + 0.0)
-
-# print "Sarcastic:" + str(TP + FN)
-# print "Non-Sarcastic:" + str(TN + FP)
-# print "Precision:" + str(pre)
-# print "Recall:" + str(rec)
-# print "Positive Accuracy:" + str(pacc)
-# print "Negative Accuracy:" + str(nacc)
-
-# print "F1 Score:" + str(2 * pre * rec / (pre + rec))
+feature_vector = pickle.load(open("feature.pickle", "rb" ) )
 
 
+for i in sarcastic_text:
+	tag_vector.append(1)
+
+for i in non_sarcastic_text:
+	tag_vector.append(0)
+
+for i in sarcastic_test:
+	tag_vector_test.append(1)
+
+for i in non_sarcastic_test:
+	tag_vector_test.append(0)
+
+'''
+print "K-Fold Cross Validation..."
+
+TP = 0
+TN = 0
+FP = 0
+FN = 0
+
+for lp in range(0, 20):
+	cv = KFold(len(feature_vector), shuffle = True)
+	for trains, tests in cv:
+		X1 = []
+		Y1 = []
+		X2 = []
+		Y2 = []
+		for i in trains:
+			X1.append(feature_vector[i])
+			Y1.append(tag_vector[i])
+		for i in tests:
+			X2.append(feature_vector[i])
+			Y2.append(tag_vector[i])
+		clf = RandomForestClassifier(n_estimators = 500, n_jobs = -1)
+		clf.fit(X1, Y1)
+		Y_pred = clf.predict(X2)
+		TP += len([i for i, j in zip(Y2, Y_pred) if i == 1 and j == 1])
+		FP += len([i for i, j in zip(Y2, Y_pred) if i == 0 and j == 1])
+		TN += len([i for i, j in zip(Y2, Y_pred) if i == 0 and j == 0])
+		FN += len([i for i, j in zip(Y2, Y_pred) if i == 1 and j == 0])
+
+pre = TP / (TP + FP + 0.0)
+rec = TP / (TP + FN + 0.0)
+pacc = TP / (TP + FN + 0.0)
+nacc = TN / (TN + FP + 0.0)
+
+print "Sarcastic:" + str(TP + FN)
+print "Non-Sarcastic:" + str(TN + FP)
+print "Precision:" + str(pre)
+print "Recall:" + str(rec)
+print "Positive Accuracy:" + str(pacc)
+print "Negative Accuracy:" + str(nacc)
+
+print "F1 Score:" + str(2 * pre * rec / (pre + rec))
+
+'''
 TP = 0
 TN = 0
 FP = 0
@@ -696,9 +720,15 @@ FN = 0
 feature_vector = pickle.load(open("feature.pickle", "rb" ) )
 feature_vector_test = pickle.load(open("feature_test.pickle", "rb" ) )
 
+feature_vector = np.concatenate((feature_vector, feature_vector_test[100:-100]))
+tag_vector = tag_vector + tag_vector_test[100:-100]
+
+feature_vector_test = np.concatenate((feature_vector_test[:100, :], feature_vector_test[-100:]))
+tag_vector_test = tag_vector_test[:100] + tag_vector_test[-100:]
+
 print len(tag_vector_test)
 
-clf = RandomForestClassifier(n_estimators = 1000, n_jobs = -1)
+clf = RandomForestClassifier(n_estimators = 100, n_jobs = -1)
 clf.fit(feature_vector, tag_vector)
 
 Y_pred = clf.predict(feature_vector_test)

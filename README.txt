@@ -3,6 +3,7 @@ README for TrueRatr, a sarcasm correcting sentiment powered web rating system fo
 Ignore all other READMEs, this one is authoritative.
 
 FRONT END
+
 Repo: https://github.com/kshreyas91/trueratr
 
 The important files are:
@@ -18,6 +19,7 @@ The important files are:
 	search_listing/css/materialize.css- Handles the rest of the custom css
 
 BACK END
+
 Repo: https://github.com/code-11/BloombergSarcasm
 
 The important files are:
@@ -31,4 +33,5 @@ The important files are:
 
 
 MODEL
+
 	sentinet/sentiment_analysis.py - How we tested and refined the model. It can do cross validation or run against the test data depending on whats commented out. Uses pickle files to shorten runtime but may lead to unexpected behavior if the pickle files are out of date / missing. Most of the other stuff in this folder is not used. This is the file we generated our F1 score with.
